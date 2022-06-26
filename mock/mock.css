@@ -1,0 +1,29 @@
+.gamebook-title {
+    font-size: 28px;
+    padding: 20px 10px 10px 10px;
+    text-align: center;
+}
+
+.main-area {
+    height: 80%;
+}
+
+.text-box {
+	text-align: left;
+    height: 100%;
+}
+.title-text {
+	padding: 20px;
+	text-align: left;
+    font-size: 24px;
+}
+.main-text {
+	padding: 20px;
+	text-align: left;
+}
+.next-select {
+    text-align: center;
+}
+.next-select-text {
+    text-align: left;
+}
