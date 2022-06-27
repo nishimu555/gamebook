@@ -1,24 +1,41 @@
 version: "3.8"
 
 services:
+  app:
+    container_name: webapp
+    build:
+      context: .
+      dockerfile: ./webapp/Dockerfile
+    volumes:
+      - ./webapp/src:/usr/src/app 
+    command: sh -c "cd gamebook && npm run dev"
+    ports:
+      - "3000:3000"
   db:
     container_name: database
     build:
       context: .
-      dockerfile: Dockerfile_mysql
+      dockerfile: mysql/Dockerfile
+
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci      
+
+    # apple m1の場合は付与しないとビルドできない
     platform: linux/x86_64
-    tty: true
+
     ports:
       - 3306:3306
+
     env_file:
-      - ./.env_mysql
+      - ./mysql/.env_mysql
+
     volumes:
       # - type: volume
       #   source: mysql-data
       #   target: /var/lib/mysql
       - type: bind
-        source: ./init
+        source: ./mysql/init
         target: /docker-entrypoint-initdb.d
+
 volumes:
   mysql-data:
     name: mysql-volume
